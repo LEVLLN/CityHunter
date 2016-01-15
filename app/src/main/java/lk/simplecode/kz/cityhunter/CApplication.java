@@ -6,17 +6,17 @@ import lk.simplecode.kz.cityhunter.network.RetrofitFacade;
 
 public class CApplication extends Application {
 
-    private static CApplication singleton;
+    private static CApplication sSingleton;
 
     public static CApplication getInstance() {
-        return singleton;
+        return sSingleton;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
         RetrofitFacade.init();
-        singleton = this;
+        sSingleton = this;
     }
 
 

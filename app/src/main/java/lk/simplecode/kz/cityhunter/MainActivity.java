@@ -6,16 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import lk.simplecode.kz.cityhunter.model.MenuOfOrganization;
-import lk.simplecode.kz.cityhunter.model.Organization;
 import lk.simplecode.kz.cityhunter.network.RetrofitFacade;
 import retrofit.Callback;
 import retrofit.Response;
@@ -23,29 +19,29 @@ import retrofit.Response;
 //recipler view
 //html
 public class MainActivity extends AppCompatActivity {
-    private ListView menuListView;
-    private MenuAdapter menuAdapter;
-    private final List<MenuOfOrganization> listMenu = new ArrayList<MenuOfOrganization>();
+    private ListView mMenuListView;
+    private MenuAdapter mMenuAdapter;
+    private final List<MenuOfOrganization> mListMenu = new ArrayList<MenuOfOrganization>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        menuListView = (ListView) findViewById(R.id.main_activitity_menu_listview);
+        mMenuListView = (ListView) findViewById(R.id.main_activitity_menu_listview);
         RetrofitFacade.getInstance().getMenu(new Callback<List<MenuOfOrganization>>() {
             @Override
             public void onResponse(Response<List<MenuOfOrganization>> response) {
-                listMenu.addAll(response.body());
-                System.out.println((listMenu));
-                menuAdapter = new MenuAdapter(MainActivity.this, listMenu);
-                menuListView.setAdapter(menuAdapter);
-                menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                mListMenu.addAll(response.body());
+                System.out.println((mListMenu));
+                mMenuAdapter = new MenuAdapter(MainActivity.this, mListMenu);
+                mMenuListView.setAdapter(mMenuAdapter);
+                mMenuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                        Log.i("Menu_Items", listMenu.get(position).getName());
-                        Long menuId = listMenu.get(position).getId();
-                        //Log.i("text",listMenu.toString());
+                        Log.i("Menu_Items", mListMenu.get(position).getName());
+                        Long menuId = mListMenu.get(position).getId();
+                        //Log.i("text",mListMenu.toString());
                         Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
                         intent.putExtra("category_id", menuId);
                         startActivity(intent);

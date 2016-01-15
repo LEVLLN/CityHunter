@@ -14,25 +14,25 @@ import lk.simplecode.kz.cityhunter.model.Organization;
 
 public class OrganizationAdapter extends BaseAdapter {
 
-    private Context context;
-    private LayoutInflater layoutInflater;
-    private List<Organization> organizationList;
+    private Context mContext;
+    private LayoutInflater mLayoutInflater;
+    private List<Organization> mOrganizationList;
 
-    public OrganizationAdapter(Context context, List<Organization> organizationList) {
-        this.context = context;
-        this.organizationList = organizationList;
-        layoutInflater = LayoutInflater.from(context);
+    public OrganizationAdapter(Context mContext, List<Organization> mOrganizationList) {
+        this.mContext = mContext;
+        this.mOrganizationList = mOrganizationList;
+        mLayoutInflater = LayoutInflater.from(mContext);
     }
 
 
     @Override
     public int getCount() {
-        return organizationList.size();
+        return mOrganizationList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return organizationList.get(position);
+        return mOrganizationList.get(position);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class OrganizationAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = layoutInflater.inflate(R.layout.organization_item, parent, false);
+            view = mLayoutInflater.inflate(R.layout.organization_item, parent, false);
         }
         Organization organization = (Organization) getItem(position);
         ((TextView) view.findViewById(R.id.organization_title)).setText("Название: " + Html.fromHtml(organization.getTitle()));

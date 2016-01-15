@@ -19,10 +19,10 @@ import retrofit.Response;
 
 
 public class OrganizationActivity extends AppCompatActivity {
-    private ListView organizationListView;
-    private OrganizationAdapter organizationAdapter;
-    private List<Organization> listOrganization = new ArrayList<Organization>();
-    private MenuOfOrganization menu;
+    private ListView mOrganizationListView;
+    private OrganizationAdapter mOrganizationAdapter;
+    private List<Organization> mListOrganization = new ArrayList<Organization>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +30,17 @@ public class OrganizationActivity extends AppCompatActivity {
         setContentView(R.layout.organization_activity);
         Intent intent = getIntent();
         long menuId = intent.getLongExtra("category_id", -1l);
-        organizationListView = (ListView) findViewById(R.id.organization_activity_listview);
+        mOrganizationListView = (ListView) findViewById(R.id.organization_activity_listview);
         RetrofitFacade.getInstance().getInstitution(menuId, new Callback<List<Organization>>() {
             @Override
             public void onResponse(Response<List<Organization>> response) {
-                listOrganization.addAll(response.body());
-                organizationAdapter = new OrganizationAdapter(OrganizationActivity.this, listOrganization);
-                organizationListView.setAdapter(organizationAdapter);
-                organizationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                mListOrganization.addAll(response.body());
+                mOrganizationAdapter = new OrganizationAdapter(OrganizationActivity.this, mListOrganization);
+                mOrganizationListView.setAdapter(mOrganizationAdapter);
+                mOrganizationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.i("organization", listOrganization.get(position).getTitle());
+                        Log.i("organization", mListOrganization.get(position).getTitle());
                     }
                 });
             }

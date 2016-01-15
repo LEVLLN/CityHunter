@@ -13,28 +13,26 @@ import java.util.List;
 import lk.simplecode.kz.cityhunter.model.MenuOfOrganization;
 
 public class MenuAdapter extends BaseAdapter {
-    private Context context;
-    private LayoutInflater layoutInflater;
-    private List<MenuOfOrganization> productList = new ArrayList<>();
+    private Context mContext;
+    private LayoutInflater mLayoutInflater;
+    private List<MenuOfOrganization> mOrganizationList = new ArrayList<>();
 
 
-    MenuAdapter(Context context1, List<MenuOfOrganization> listMenu) {
-        context = context1;
-        productList = listMenu;
-        layoutInflater = LayoutInflater.from(context);
-        //   layoutInflater = (LayoutInflater) context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
-
+    MenuAdapter(Context context1, List<MenuOfOrganization> organizationList) {
+        mContext = context1;
+        mOrganizationList = organizationList;
+        mLayoutInflater = LayoutInflater.from(mContext);
     }
 
 
     @Override
     public int getCount() {
-        return productList.size();
+        return mOrganizationList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return productList.get(position);
+        return mOrganizationList.get(position);
     }
 
     @Override
@@ -47,7 +45,7 @@ public class MenuAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = layoutInflater.inflate(R.layout.menu_item, parent, false);
+            view = mLayoutInflater.inflate(R.layout.menu_item, parent, false);
 
         }
 
