@@ -2,9 +2,10 @@ package lk.simplecode.kz.cityhunter.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Institution {
+public class Organization {
 
     @SerializedName("id")
     private Long id;
@@ -79,7 +80,7 @@ public class Institution {
 
     @Override
     public String toString() {
-        return "Institution{" +
+        return "Organization{" +
                 "address='" + address + '\'' +
                 ", id=" + id +
                 ", title='" + title + '\'' +

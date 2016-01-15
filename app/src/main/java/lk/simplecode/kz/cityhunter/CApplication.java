@@ -6,8 +6,6 @@ import lk.simplecode.kz.cityhunter.network.RetrofitFacade;
 
 public class CApplication extends Application {
 
-    public String helloFromCApplication = "Hello From GlobalApplication";
-
     private static CApplication singleton;
 
     public static CApplication getInstance() {

@@ -2,7 +2,9 @@ package lk.simplecode.kz.cityhunter.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MenuCityHunter {
+import java.io.Serializable;
+
+public class MenuOfOrganization {
     @SerializedName("id")
     private Long id;
     @SerializedName("name")
@@ -26,7 +28,7 @@ public class MenuCityHunter {
 
     @Override
     public String toString() {
-        return "MenuCityHunter{" +
+        return "MenuOfOrganization{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

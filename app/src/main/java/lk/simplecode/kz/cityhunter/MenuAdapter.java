@@ -10,23 +10,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import lk.simplecode.kz.cityhunter.model.MenuCityHunter;
+import lk.simplecode.kz.cityhunter.model.MenuOfOrganization;
 
-public class MyAdapter extends BaseAdapter {
-    Context context;
-    LayoutInflater layoutInflater;
-    List<MenuCityHunter> productList = new ArrayList<>();
+public class MenuAdapter extends BaseAdapter {
+    private Context context;
+    private LayoutInflater layoutInflater;
+    private List<MenuOfOrganization> productList = new ArrayList<>();
 
 
-    MyAdapter(Context context1, List<MenuCityHunter> listMenu) {
+    MenuAdapter(Context context1, List<MenuOfOrganization> listMenu) {
         context = context1;
         productList = listMenu;
         layoutInflater = LayoutInflater.from(context);
         //   layoutInflater = (LayoutInflater) context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
 
     }
-
-
 
 
     @Override
@@ -49,11 +47,11 @@ public class MyAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = layoutInflater.inflate(R.layout.item, parent, false);
+            view = layoutInflater.inflate(R.layout.menu_item, parent, false);
 
         }
 
-        MenuCityHunter menu = (MenuCityHunter) getItem(position);
+        MenuOfOrganization menu = (MenuOfOrganization) getItem(position);
 
         ((TextView) view.findViewById(R.id.menu_name)).setText(menu.getName());
 //        ((TextView) view.findViewById(R.id.menu_id)).setText(String.valueOf(menu.getId()));
@@ -61,10 +59,9 @@ public class MyAdapter extends BaseAdapter {
         return view;
     }
 
-    MenuCityHunter getProduct(int position) {
-        return ((MenuCityHunter) getItem(position));
+    MenuOfOrganization getProduct(int position) {
+        return ((MenuOfOrganization) getItem(position));
     }
-
 
 
 }
