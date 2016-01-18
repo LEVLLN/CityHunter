@@ -42,6 +42,8 @@ public class OrganizationListActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.organization_activity_recypler_view);
         Intent intent = getIntent();
         long menuId = intent.getLongExtra("category_id", -1l);
+        String title = intent.getExtras().getString("title");
+        setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         RetrofitFacade.getInstance().getInstitution(menuId, new Callback<List<Organization>>() {

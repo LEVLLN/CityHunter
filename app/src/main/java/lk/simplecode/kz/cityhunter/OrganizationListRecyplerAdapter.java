@@ -92,12 +92,4 @@ public class OrganizationListRecyplerAdapter extends RecyclerView.Adapter<Organi
         }
     }
 
-    public class CustomSelectSort implements Comparator<Organization> {
-
-
-        @Override
-        public int compare(Organization lhs, Organization rhs) {
-            return !(lhs.isRec() ^ rhs.isRec()) ? -1 : 1;
-        }
-    }
 }

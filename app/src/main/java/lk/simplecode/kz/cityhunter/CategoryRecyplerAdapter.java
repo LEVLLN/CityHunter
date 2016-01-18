@@ -13,37 +13,38 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import lk.simplecode.kz.cityhunter.model.MenuOfOrganization;
+import lk.simplecode.kz.cityhunter.model.Category;
 
-public class MenuRecyplerAdapter extends RecyclerView.Adapter<MenuRecyplerAdapter.ViewHolder> {
+public class CategoryRecyplerAdapter extends RecyclerView.Adapter<CategoryRecyplerAdapter.ViewHolder> {
     private Context mContext;
-    private List<MenuOfOrganization> mMenuList = new ArrayList<MenuOfOrganization>();
+    private List<Category> mCategoryList = new ArrayList<Category>();
 
-    public MenuRecyplerAdapter(Context context, List<MenuOfOrganization> mMenuList) {
+    public CategoryRecyplerAdapter(Context context, List<Category> mCategoryList) {
         this.mContext = context;
-        this.mMenuList = mMenuList;
+        this.mCategoryList = mCategoryList;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_menu_list, parent, false);
+                .inflate(R.layout.item_category_list, parent, false);
 
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        StringBuilder sb = new StringBuilder(mMenuList.get(position).getName());
+        StringBuilder sb = new StringBuilder(mCategoryList.get(position).getName());
         sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
-
-        holder.mTextView.setText(sb.toString());
+        final String title = sb.toString().replace("Караганды","");
+        holder.mTextView.setText(title);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Long menuId = mMenuList.get(position).getId();
+                Long menuId = mCategoryList.get(position).getId();
                 Intent intent = new Intent(mContext, OrganizationListActivity.class);
                 intent.putExtra("category_id", menuId);
+                intent.putExtra("title",title);
                 mContext.startActivity(intent);
             }
         });
@@ -56,7 +57,7 @@ public class MenuRecyplerAdapter extends RecyclerView.Adapter<MenuRecyplerAdapte
 
     @Override
     public int getItemCount() {
-        return mMenuList.size();
+        return mCategoryList.size();
     }
 
 

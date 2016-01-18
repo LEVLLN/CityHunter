@@ -63,7 +63,7 @@
                     android:id="@+id/tv_recomended"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Рекомендуем"
+                    android:text="@string/recomended"
                     android:textSize="20dp"
                     android:layout_marginTop="140dp"
                     android:paddingLeft="8dp"

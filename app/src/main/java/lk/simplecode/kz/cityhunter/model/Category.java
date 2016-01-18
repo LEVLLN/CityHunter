@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class MenuOfOrganization {
+public class Category {
     @SerializedName("id")
     private Long id;
     @SerializedName("name")
@@ -28,7 +28,7 @@ public class MenuOfOrganization {
 
     @Override
     public String toString() {
-        return "MenuOfOrganization{" +
+        return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
