@@ -3,6 +3,7 @@ package lk.simplecode.kz.cityhunter.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Organization {
@@ -90,4 +91,16 @@ public class Organization {
                 ", isRec=" + isRec +
                 '}';
     }
+
+
+   public static class OrganizationComparator implements Comparator<Organization>{
+
+    @Override
+    public int compare(Organization lhs, Organization rhs) {
+        boolean a1 = lhs.isRec;
+        boolean a2 = rhs.isRec;
+
+        return Boolean.compare(a2,a1);
+    }
+}
 }

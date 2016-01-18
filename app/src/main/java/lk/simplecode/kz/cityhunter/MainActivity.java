@@ -3,6 +3,8 @@ package lk.simplecode.kz.cityhunter;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,34 +21,26 @@ import retrofit.Response;
 //recipler view
 //html
 public class MainActivity extends AppCompatActivity {
-    private ListView mMenuListView;
-    private MenuAdapter mMenuAdapter;
-    private final List<MenuOfOrganization> mListMenu = new ArrayList<MenuOfOrganization>();
+
+    private RecyclerView mRecyplerView;
+    private RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+    private List<MenuOfOrganization> mMenuList = new ArrayList<MenuOfOrganization>();
+    private MenuRecyplerAdapter mMenuRecyplerAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mMenuListView = (ListView) findViewById(R.id.main_activitity_menu_listview);
+        mRecyplerView = (RecyclerView) findViewById(R.id.main_activitity_menu_recypler_view);
         RetrofitFacade.getInstance().getMenu(new Callback<List<MenuOfOrganization>>() {
             @Override
             public void onResponse(Response<List<MenuOfOrganization>> response) {
-                mListMenu.addAll(response.body());
-                System.out.println((mListMenu));
-                mMenuAdapter = new MenuAdapter(MainActivity.this, mListMenu);
-                mMenuListView.setAdapter(mMenuAdapter);
-                mMenuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                        Log.i("Menu_Items", mListMenu.get(position).getName());
-                        Long menuId = mListMenu.get(position).getId();
-                        //Log.i("text",mListMenu.toString());
-                        Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
-                        intent.putExtra("category_id", menuId);
-                        startActivity(intent);
-                    }
-                });
+                mMenuList.addAll(response.body());
+                Log.i("Text", mMenuList.toString());
+                mRecyplerView.setLayoutManager(mLayoutManager);
+                mMenuRecyplerAdapter = new MenuRecyplerAdapter(MainActivity.this, mMenuList);
+                mRecyplerView.setAdapter(mMenuRecyplerAdapter);
             }
 
             @Override
@@ -54,10 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
-    }
-
-
-    public void onClick(View view) {
 
     }
+
 }
