@@ -45,21 +45,20 @@ public class OrganizationListRecyplerAdapter extends RecyclerView.Adapter<Organi
         Picasso.with(mContext)
                 .load("http://" + mOrganizationList.get(position).getImageUrl())
                 .into(holder.mImageViewCaption);
-        if(mOrganizationList.get(position).isRec()){
+        if (mOrganizationList.get(position).isRec()) {
             holder.mTVRecomended.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             holder.mTVRecomended.setVisibility(View.GONE);
         }
         holder.mTVTitle.setText(Html.fromHtml(mOrganizationList.get(position).getTitle()));
         holder.mTVAddress.setText(mOrganizationList.get(position).getAddress());
-        if (mOrganizationList.get(position).getDescription().equals("")){
+        if (mOrganizationList.get(position).getDescription().equals("")) {
             holder.mTVDescription.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             holder.mTVDescription.setVisibility(View.VISIBLE);
             holder.mTVDescription.setMaxLines(3);
-        holder.mTVDescription.setText(Html.fromHtml(mOrganizationList.get(position).getDescription()));}
+            holder.mTVDescription.setText(Html.fromHtml(mOrganizationList.get(position).getDescription()));
+        }
     }
 
     @Override
@@ -92,12 +91,13 @@ public class OrganizationListRecyplerAdapter extends RecyclerView.Adapter<Organi
 
         }
     }
+
     public class CustomSelectSort implements Comparator<Organization> {
 
 
         @Override
         public int compare(Organization lhs, Organization rhs) {
-            return !(lhs.isRec() ^ rhs.isRec())? -1:1;
+            return !(lhs.isRec() ^ rhs.isRec()) ? -1 : 1;
         }
     }
 }

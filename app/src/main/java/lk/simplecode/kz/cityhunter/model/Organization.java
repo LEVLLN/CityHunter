@@ -93,14 +93,14 @@ public class Organization {
     }
 
 
-   public static class OrganizationComparator implements Comparator<Organization>{
+    public static class OrganizationComparator implements Comparator<Organization> {
 
-    @Override
-    public int compare(Organization lhs, Organization rhs) {
-        boolean a1 = lhs.isRec;
-        boolean a2 = rhs.isRec;
+        @Override
+        public int compare(Organization lhs, Organization rhs) {
+            boolean a1 = lhs.isRec;
+            boolean a2 = rhs.isRec;
 
-        return Boolean.compare(a2,a1);
+            return Boolean.compare(a2, a1);
+        }
     }
-}
 }

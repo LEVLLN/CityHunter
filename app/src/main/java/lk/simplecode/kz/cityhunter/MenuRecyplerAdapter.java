@@ -43,8 +43,8 @@ public class MenuRecyplerAdapter extends RecyclerView.Adapter<MenuRecyplerAdapte
             public void onClick(View v) {
                 Long menuId = mMenuList.get(position).getId();
                 Intent intent = new Intent(mContext, OrganizationListActivity.class);
-                        intent.putExtra("category_id", menuId);
-                        mContext.startActivity(intent);
+                intent.putExtra("category_id", menuId);
+                mContext.startActivity(intent);
             }
         });
     }

@@ -28,9 +28,9 @@ public class OrganizationListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-                finish();
-                return true;
-            }
+            finish();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -58,18 +58,6 @@ public class OrganizationListActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
-
-
-//        @Override
-//        public boolean onOptionsItemSelected(MenuItem item) {
-//            if (item.getItemId() == android.R.id.home) {
-//                finish();
-//                return true;                            //закрывает данный layout
-//            }
-//
-//            return super.onOptionsItemSelected(item);
-//        }
-
     }
 
 
