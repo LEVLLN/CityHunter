@@ -46,7 +46,7 @@ public class OrganizationListActivity extends AppCompatActivity {
         setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RetrofitFacade.getInstance().getInstitution(menuId, new Callback<List<Organization>>() {
+        RetrofitFacade.getInstance().getOrganization(menuId,"", new Callback<List<Organization>>() {
             @Override
             public void onResponse(Response<List<Organization>> response) {
                 mListOrganization.addAll(response.body());

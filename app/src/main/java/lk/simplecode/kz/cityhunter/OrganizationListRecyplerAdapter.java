@@ -1,6 +1,7 @@
 package lk.simplecode.kz.cityhunter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -15,7 +16,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import lk.simplecode.kz.cityhunter.model.Organization;
@@ -39,9 +39,8 @@ public class OrganizationListRecyplerAdapter extends RecyclerView.Adapter<Organi
     }
 
     @Override
-    public void onBindViewHolder(OrganizationViewHolder holder, int position) {
+    public void onBindViewHolder(OrganizationViewHolder holder, final int position) {
         Collections.sort(mOrganizationList, new Organization.OrganizationComparator());
-        Log.i("image", mOrganizationList.get(position).getImageUrl());
         Picasso.with(mContext)
                 .load("http://" + mOrganizationList.get(position).getImageUrl())
                 .into(holder.mImageViewCaption);
@@ -59,6 +58,15 @@ public class OrganizationListRecyplerAdapter extends RecyclerView.Adapter<Organi
             holder.mTVDescription.setMaxLines(3);
             holder.mTVDescription.setText(Html.fromHtml(mOrganizationList.get(position).getDescription()));
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Long id = mOrganizationList.get(position).getId();
+                Intent intent = new Intent(mContext,DetailedOrganizationActivity.class);
+                intent.putExtra("post_id",id);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

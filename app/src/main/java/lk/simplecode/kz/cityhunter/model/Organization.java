@@ -2,7 +2,6 @@ package lk.simplecode.kz.cityhunter.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
 

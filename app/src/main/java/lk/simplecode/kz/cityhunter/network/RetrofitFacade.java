@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import lk.simplecode.kz.cityhunter.model.Category;
+import lk.simplecode.kz.cityhunter.model.DetailedOrganization;
 import lk.simplecode.kz.cityhunter.model.Organization;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
@@ -13,7 +14,6 @@ import retrofit.Retrofit;
 
 public class RetrofitFacade {
     private static RetrofitFacade sInstance;
-
     private Retrofit mRetrofit;
     private ApiService mApiService;
 
@@ -41,7 +41,11 @@ public class RetrofitFacade {
 
     }
 
-    public void getInstitution(Long id, Callback<List<Organization>> callback) {
-        mApiService.organizationList(id).enqueue(callback);
+    public void getOrganization(Long id, String newOrganization, Callback<List<Organization>> callback) {
+        mApiService.organizationList(id,newOrganization).enqueue(callback);
+    }
+
+    public void getDetailedOrganization(Long id, Callback<DetailedOrganization> callback){
+        mApiService.clarification(id).enqueue(callback);
     }
 }
