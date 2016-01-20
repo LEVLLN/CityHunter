@@ -18,7 +18,9 @@ android {
         }
     }
 }
-
+repositories {
+    mavenCentral()
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -31,6 +33,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:design:23.1.0'
     compile 'com.android.support:design:23.1.1'
+    compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
+
 }

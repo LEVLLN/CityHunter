@@ -51,10 +51,11 @@ public class CategoryFragment extends Fragment {
 
         final View result = inflater.inflate(R.layout.fragment_category, container, false);
         final RecyclerView recyclerView;
+        final ProgressBar firstBar;
 
         recyclerView = (RecyclerView) result.findViewById(R.id.main_activitity_menu_recypler_view);
-        final ProgressBar firstBar;
         firstBar = (ProgressBar) result.findViewById(R.id.progressBar);
+
         RetrofitFacade.getInstance().getMenu(new Callback<List<Category>>() {
             @Override
             public void onResponse(Response<List<Category>> response) {

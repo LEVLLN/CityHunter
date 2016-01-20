@@ -8,6 +8,7 @@
         <item name="android:titleTextColor">@color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/white</item>
+        <item name="android:selectedWeekBackgroundColor">@color/black</item>
         <item name="android:indeterminateTint">@color/color_main</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
 
