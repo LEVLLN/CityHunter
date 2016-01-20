@@ -36,7 +36,7 @@ public class CategoryRecyplerAdapter extends RecyclerView.Adapter<CategoryRecypl
     public void onBindViewHolder(ViewHolder holder, final int position) {
         StringBuilder sb = new StringBuilder(mCategoryList.get(position).getName());
         sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
-        final String title = sb.toString().replace("Караганды","");
+        final String title = sb.toString().replace("Караганды", "");
         holder.mTextView.setText(title);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,7 @@ public class CategoryRecyplerAdapter extends RecyclerView.Adapter<CategoryRecypl
                 Long menuId = mCategoryList.get(position).getId();
                 Intent intent = new Intent(mContext, OrganizationListActivity.class);
                 intent.putExtra("category_id", menuId);
-                intent.putExtra("title",title);
+                intent.putExtra("title", title);
                 mContext.startActivity(intent);
             }
         });

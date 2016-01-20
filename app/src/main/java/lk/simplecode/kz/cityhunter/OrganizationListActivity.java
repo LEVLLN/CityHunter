@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +20,7 @@ import retrofit.Response;
 
 
 public class OrganizationListActivity extends AppCompatActivity {
-    //    private ListView mOrganizationListView;
-//    private OrganizationAdapter mOrganizationAdapter;
+
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
     private OrganizationListRecyplerAdapter mOrganizationAdapter;
@@ -43,20 +45,32 @@ public class OrganizationListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         long menuId = intent.getLongExtra("category_id", -1l);
         String title = intent.getExtras().getString("title");
+        setTheme(R.style.AppTheme);
         setTitle(title);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.organization_list_toolbar);
+        setSupportActionBar(toolbar);
+        final ProgressBar firstBar;
+        firstBar = (ProgressBar) findViewById(R.id.organization_list_pb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RetrofitFacade.getInstance().getOrganization(menuId,"", new Callback<List<Organization>>() {
+        RetrofitFacade.getInstance().getOrganization(menuId, "", new Callback<List<Organization>>() {
             @Override
             public void onResponse(Response<List<Organization>> response) {
-                mListOrganization.addAll(response.body());
-                mRecyclerView.setLayoutManager(mLayoutManager);
-                mOrganizationAdapter = new OrganizationListRecyplerAdapter(OrganizationListActivity.this, mListOrganization);
-                mRecyclerView.setAdapter(mOrganizationAdapter);
+                if (response.isSuccess()) {
+                    mListOrganization.addAll(response.body());
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    mOrganizationAdapter = new OrganizationListRecyplerAdapter(OrganizationListActivity.this, mListOrganization);
+                    mRecyclerView.setAdapter(mOrganizationAdapter);
+                    firstBar.setVisibility(View.GONE);
+                }
+                if (!response.isSuccess()) {
+                    firstBar.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onFailure(Throwable t) {
+                firstBar.setVisibility(View.VISIBLE);
                 t.printStackTrace();
             }
         });

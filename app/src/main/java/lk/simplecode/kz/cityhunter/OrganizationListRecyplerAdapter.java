@@ -64,6 +64,7 @@ public class OrganizationListRecyplerAdapter extends RecyclerView.Adapter<Organi
                 Long id = mOrganizationList.get(position).getId();
                 Intent intent = new Intent(mContext,DetailedOrganizationActivity.class);
                 intent.putExtra("post_id",id);
+                intent.putExtra("title",mOrganizationList.get(position).getTitle());
                 mContext.startActivity(intent);
             }
         });
