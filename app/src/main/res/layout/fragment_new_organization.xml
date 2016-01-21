@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<RelativeLayout
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
@@ -18,6 +18,9 @@
 
     </android.support.v7.widget.RecyclerView>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <ProgressBar
         android:id="@+id/new_organization_pb"
         android:layout_width="match_parent"
@@ -27,4 +30,5 @@
         android:indeterminateTint="@color/color_main"
         android:indeterminateTintMode="src_in" />
 </RelativeLayout>
+    </FrameLayout>
 </LinearLayout>

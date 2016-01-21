@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detail_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,37 +13,59 @@
         android:background="@color/colorPrimary"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/detail_linear_layout_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/image_slider_view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="255dp"
+                        android:onClick="toFullScreen" />
+
+                    <com.viewpagerindicator.CirclePageIndicator
+                        android:id="@+id/circle_page_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="245dp"
+                        android:theme="@style/AppTheme" />
+                </FrameLayout>
+                <!--<TextView-->
+                <!--android:id="@+id/detail_title"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:textColor="@color/black"-->
+                <!--/>-->
+            </LinearLayout>
+        </ScrollView>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <TextView
-                android:id="@+id/detail_title"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:textColor="@color/black"
-                android:visibility="gone" />
-            <android.support.v4.view.ViewPager
-                android:id="@+id/image_slider_view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
-
-            <com.viewpagerindicator.CirclePageIndicator
-                android:id="@+id/circle_page_indicator"
-                android:layout_width="match_parent"
-                android:layout_marginTop="180dp"
-                android:layout_height="40dp"
-                android:theme="@style/AppTheme" />
             <ProgressBar
                 android:id="@+id/detail_organization_pb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:indeterminateTint="@color/color_main"
                 android:indeterminateTintMode="src_in" />
         </RelativeLayout>
-
+    </FrameLayout>
 
 </LinearLayout>

@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     tools:mContext="lk.simplecode.kz.cityhunter.MainActivity"
     android:orientation="vertical">>
-<RelativeLayout
+
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
@@ -17,14 +18,19 @@
 
 
     </android.support.v7.widget.RecyclerView>
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:indeterminateTint="@color/color_main"
-        android:indeterminateTintMode="src_in"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:indeterminateTint="@color/color_main"
+                android:indeterminateTintMode="src_in"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 </RelativeLayout>
+
+    </FrameLayout>
 </LinearLayout>

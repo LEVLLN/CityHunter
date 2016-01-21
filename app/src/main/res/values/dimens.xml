@@ -6,4 +6,5 @@
     <dimen name="text_size_description">15dp</dimen>
     <dimen name="text_size_address">11dp</dimen>
     <dimen name="padding_14">14dp</dimen>
+    <dimen name="magrin_dp">10dp</dimen>
 </resources>
