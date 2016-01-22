@@ -23,6 +23,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/category_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:layout_centerInParent="true"
+                android:text="НЕТ СОЕДИНЕНИЯ С СЕРВЕРОМ\n ПОПРОБУЙТЕ ЕЩЕ РАЗ"
+                android:textAlignment="center"
+                android:textStyle="bold" />
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:indeterminateTint="@color/color_main"

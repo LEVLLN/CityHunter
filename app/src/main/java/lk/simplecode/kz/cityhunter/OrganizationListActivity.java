@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class OrganizationListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
     private OrganizationListRecyplerAdapter mOrganizationAdapter;
     private List<Organization> mListOrganization = new ArrayList<Organization>();
+    private TextView mErrorTv;
 
 
     @Override
@@ -42,6 +44,8 @@ public class OrganizationListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_list);
         mRecyclerView = (RecyclerView) findViewById(R.id.organization_activity_recypler_view);
+        mErrorTv = (TextView) findViewById(R.id.org_list_error);
+        mErrorTv.setVisibility(View.GONE);
         Intent intent = getIntent();
         long menuId = intent.getLongExtra("category_id", -1l);
         String title = intent.getExtras().getString("title");
@@ -64,13 +68,14 @@ public class OrganizationListActivity extends AppCompatActivity {
                     firstBar.setVisibility(View.GONE);
                 }
                 if (!response.isSuccess()) {
-                    firstBar.setVisibility(View.GONE);
+                    firstBar.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                firstBar.setVisibility(View.VISIBLE);
+                firstBar.setVisibility(View.GONE);
+                mErrorTv.setVisibility(View.VISIBLE);
                 t.printStackTrace();
             }
         });

@@ -99,7 +99,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                     final Handler handler = new Handler();
                     final Runnable Update = new Runnable() {
                         public void run() {
-                            if (currentPage >= NUM_PAGES) {
+                            if (currentPage == NUM_PAGES) {
                                 currentPage = 0;
                             }
 
@@ -112,7 +112,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                         public void run() {
                             handler.post(Update);
                         }
-                    }, 2000, 2000);
+                    }, 3000, 3000);
 
                     // Pager listener over indicator
                     mPageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class CategoryFragment extends Fragment {
     private View mResult;
     private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar;
+    private TextView mErrorTv;
 
     public static CategoryFragment newInstance(int page) {
         CategoryFragment fragment = new CategoryFragment();
@@ -49,6 +51,9 @@ public class CategoryFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) mResult.findViewById(R.id.main_activitity_menu_recypler_view);
         mProgressBar = (ProgressBar) mResult.findViewById(R.id.progressBar);
+        mErrorTv = (TextView) mResult.findViewById(R.id.category_error);
+        mErrorTv.setVisibility(View.GONE);
+
 
         RetrofitFacade.getInstance().getMenu(new Callback<List<Category>>() {
             @Override
@@ -68,7 +73,8 @@ public class CategoryFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable t) {
-                mProgressBar.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.GONE);
+                mErrorTv.setVisibility(View.VISIBLE);
                 t.printStackTrace();
             }
         });
