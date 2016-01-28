@@ -1,18 +1,12 @@
 package lk.simplecode.kz.cityhunter;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.DisplayMetrics;
@@ -20,11 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
 
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
@@ -191,6 +186,13 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                         Log.i("size", String.valueOf(i));
                         nums = telephoneNumList.get(i).getValue().split(";");
                     }
+                    LayoutInflater marginFlater = LayoutInflater.from(DetailedOrganizationActivity.this);
+                    final View marginView = marginFlater.inflate(R.layout.item_line, mLinearLayout, false);
+                    marginView.setBackgroundColor(Color.WHITE);
+                    mTabParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    mTabParams.setMargins(0, 0, 0, 0);
+                    marginView.setLayoutParams(mTabParams);
+                    mLinearLayout.addView(marginView);
 
                     for (String telephoneNumber : nums) {
                         LayoutInflater layoutInflater = LayoutInflater.from(DetailedOrganizationActivity.this);
