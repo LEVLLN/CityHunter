@@ -11,8 +11,7 @@ import android.widget.ProgressBar;
 
 import com.squareup.picasso.Picasso;
 
-
-public class SlidingImage_Adapter extends PagerAdapter {
+public class SlidingImage_Full_Screen_Adapter extends PagerAdapter {
 
 
     private String[] IMAGES;
@@ -20,7 +19,7 @@ public class SlidingImage_Adapter extends PagerAdapter {
     private Context context;
 
 
-    public SlidingImage_Adapter(Context context, String[] images) {
+    public SlidingImage_Full_Screen_Adapter(Context context, String[] images) {
         this.context = context;
         this.IMAGES = images;
         inflater = LayoutInflater.from(context);
@@ -38,16 +37,15 @@ public class SlidingImage_Adapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
-        View imageLayout = inflater.inflate(R.layout.fragment_image_slider, view, false);
-        final ProgressBar progressBar = (ProgressBar) imageLayout.findViewById(R.id.loading_image_pb_min);
-        progressBar.setVisibility(View.VISIBLE);
+        View imageLayout = inflater.inflate(R.layout.fragment_fullscreen_image_slider, view, false);
+
         assert imageLayout != null;
         final ImageView imageView = (ImageView) imageLayout
-                .findViewById(R.id.image_slider_iv);
-
+                .findViewById(R.id.image_fullscreen_slider_iv);
+        final ProgressBar progressBar = (ProgressBar) imageLayout.findViewById(R.id.loading_image_pb);
+        progressBar.setVisibility(View.VISIBLE);
         Picasso.with(context)
                 .load("http://" + IMAGES[position])
-
                 .into(imageView);
         view.addView(imageLayout, 0);
 

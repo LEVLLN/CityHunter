@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
 
@@ -9,17 +9,16 @@
         android:layout_height="match_parent">
 
         <ProgressBar
-            android:id="@+id/loading_image_pb_min"
+            android:id="@+id/loading_image_pb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:indeterminateTint="@color/color_main"
             android:indeterminateTintMode="src_in" />
     </RelativeLayout>
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/image_slider_iv"
-    android:scaleType="centerCrop"
-    android:onClick="toFullScreen" />
+
+    <ImageView
+        android:id="@+id/image_fullscreen_slider_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

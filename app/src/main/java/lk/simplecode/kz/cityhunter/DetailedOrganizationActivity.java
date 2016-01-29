@@ -48,6 +48,8 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
     private LinearLayout mAddressLayout;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
+    private String[] images;
+
 
     private static List<String> sImportantCapions;
 
@@ -87,13 +89,19 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                     mDetailedOrganization = response.body();
                     Log.i("detail", mDetailedOrganization.toString());
                     mPager = (ViewPager) findViewById(R.id.image_slider_view_pager);
-                    String[] images = mDetailedOrganization.getImages();
+                    images = mDetailedOrganization.getImages();
+                    NUM_PAGES = images.length;
                     mPager.setAdapter(new SlidingImage_Adapter(DetailedOrganizationActivity.this, images));
                     mPageIndicator = (CirclePageIndicator) findViewById(R.id.circle_page_indicator);
                     mPageIndicator.setViewPager(mPager);
                     final Handler handler = new Handler();
                     final Runnable Update = new Runnable() {
                         public void run() {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             if (currentPage == NUM_PAGES) {
                                 currentPage = 0;
                             }
@@ -101,6 +109,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                             mPager.setCurrentItem(currentPage++, true);
                         }
                     };
+
                     Timer swipeTimer = new Timer();
                     swipeTimer.schedule(new TimerTask() {
                         @Override
@@ -162,7 +171,6 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                         final View view = layoutInflater.inflate(R.layout.item_content, mLinearLayout, false);
                         ImageView iconImportant = (ImageView) view.findViewById(R.id.icon_item);
                         TextView tvValue = (TextView) view.findViewById(R.id.tv_item_content);
-                        Log.i("TEST_ADRESS", important.getValue());
                         tvValue.setText(important.getValue());
                         iconImportant.setBackgroundColor(Color.BLACK);
                         mLinearLayout.addView(view);
@@ -186,13 +194,16 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                         Log.i("size", String.valueOf(i));
                         nums = telephoneNumList.get(i).getValue().split(";");
                     }
-                    LayoutInflater marginFlater = LayoutInflater.from(DetailedOrganizationActivity.this);
-                    final View marginView = marginFlater.inflate(R.layout.item_line, mLinearLayout, false);
-                    marginView.setBackgroundColor(Color.WHITE);
-                    mTabParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    mTabParams.setMargins(0, 0, 0, 0);
-                    marginView.setLayoutParams(mTabParams);
-                    mLinearLayout.addView(marginView);
+                    if (!featureList.isEmpty()) {
+                        LayoutInflater marginFlater = LayoutInflater.from(DetailedOrganizationActivity.this);
+                        final View marginView = marginFlater.inflate(R.layout.item_line, mLinearLayout, false);
+                        marginView.setBackgroundColor(Color.WHITE);
+                        mTabParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                        mTabParams.setMargins(0, 0, 0, dpToPx(30));
+                        marginView.setLayoutParams(mTabParams);
+                        mLinearLayout.addView(marginView);
+                    }
+
 
                     for (String telephoneNumber : nums) {
                         LayoutInflater layoutInflater = LayoutInflater.from(DetailedOrganizationActivity.this);
@@ -240,7 +251,9 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
     }
 
     public void toFullScreen(View view) {
-
+        Intent intent = new Intent(DetailedOrganizationActivity.this, FullScreenImageSliderActivity.class);
+        intent.putExtra("images", images);
+        startActivity(intent);
     }
 
     public int dpToPx(int dp) {
