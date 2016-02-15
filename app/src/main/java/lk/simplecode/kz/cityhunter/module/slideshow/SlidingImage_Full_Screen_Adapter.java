@@ -1,4 +1,4 @@
-package lk.simplecode.kz.cityhunter;
+package lk.simplecode.kz.cityhunter.module.slideshow;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -11,19 +11,20 @@ import android.widget.ProgressBar;
 
 import com.squareup.picasso.Picasso;
 
+import lk.simplecode.kz.cityhunter.R;
 
-public class SlidingImage_Adapter extends PagerAdapter {
-
-
-    private String[] IMAGES;
-    private LayoutInflater inflater;
-    private Context context;
+public class SlidingImage_Full_Screen_Adapter extends PagerAdapter {
 
 
-    public SlidingImage_Adapter(Context context, String[] images) {
-        this.context = context;
-        this.IMAGES = images;
-        inflater = LayoutInflater.from(context);
+    private String[] mImages;
+    private LayoutInflater mInflater;
+    private Context mContext;
+
+
+    public SlidingImage_Full_Screen_Adapter(Context mContext, String[] images) {
+        this.mContext = mContext;
+        this.mImages = images;
+        mInflater = LayoutInflater.from(mContext);
     }
 
     @Override
@@ -33,21 +34,20 @@ public class SlidingImage_Adapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return IMAGES.length;
+        return mImages.length;
     }
 
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
-        View imageLayout = inflater.inflate(R.layout.fragment_image_slider, view, false);
-        final ProgressBar progressBar = (ProgressBar) imageLayout.findViewById(R.id.loading_image_pb_min);
-        progressBar.setVisibility(View.VISIBLE);
+        View imageLayout = mInflater.inflate(R.layout.fragment_fullscreen_image_slider, view, false);
+
         assert imageLayout != null;
         final ImageView imageView = (ImageView) imageLayout
-                .findViewById(R.id.image_slider_iv);
-
-        Picasso.with(context)
-                .load("http://" + IMAGES[position])
-
+                .findViewById(R.id.image_fullscreen_slider_iv);
+        final ProgressBar progressBar = (ProgressBar) imageLayout.findViewById(R.id.loading_image_pb);
+        progressBar.setVisibility(View.VISIBLE);
+        Picasso.with(mContext)
+                .load("http://" + mImages[position])
                 .into(imageView);
         view.addView(imageLayout, 0);
 

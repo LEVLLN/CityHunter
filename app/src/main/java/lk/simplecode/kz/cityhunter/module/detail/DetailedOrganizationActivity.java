@@ -1,4 +1,4 @@
-package lk.simplecode.kz.cityhunter;
+package lk.simplecode.kz.cityhunter.module.detail;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -29,8 +29,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import lk.simplecode.kz.cityhunter.R;
 import lk.simplecode.kz.cityhunter.model.DetailedOrganization;
 import lk.simplecode.kz.cityhunter.model.Info;
+import lk.simplecode.kz.cityhunter.module.slideshow.FullScreenImageSliderActivity;
 import lk.simplecode.kz.cityhunter.network.RetrofitFacade;
 import retrofit.Callback;
 import retrofit.Response;
@@ -45,12 +47,12 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
     private LayoutParams mIconParams;
     private Toolbar mToolbar;
     private ProgressBar mProgressBar;
+    private ImageView mRefresh;
+    private TextView mError;
     private LinearLayout mAddressLayout;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
     private String[] images;
-
-
     private static List<String> sImportantCapions;
 
     static {
@@ -64,9 +66,10 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_organization);
-
         mLinearLayout = (LinearLayout) findViewById(R.id.detail_linear_layout_content);
         mToolbar = (Toolbar) findViewById(R.id.detail_organization_toolbar);
+        mError = (TextView) findViewById(R.id.detail_error);
+        mRefresh = (ImageView)findViewById(R.id.detail_refresh);
         mProgressBar = (ProgressBar) findViewById(R.id.detail_organization_pb);
 
         setSupportActionBar(mToolbar);
@@ -77,15 +80,28 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
         long menuId = intent.getLongExtra("post_id", -1l);
         String title = intent.getStringExtra("title");
         setTitle(Html.fromHtml(title));
+        mError.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
+        mRefresh.setVisibility(View.GONE);
+        mLinearLayout.setVisibility(View.GONE);
+        getData(menuId);
+    }
 
 
+    public void getData(final long menuId){
         RetrofitFacade.getInstance().getDetailedOrganization(menuId, new Callback<DetailedOrganization>() {
             @Override
             public void onResponse(Response<DetailedOrganization> response) {
                 if (!response.isSuccess()) {
                     mProgressBar.setVisibility(View.VISIBLE);
+                    mError.setVisibility(View.GONE);
+                    mRefresh.setVisibility(View.GONE);
                 }
                 if (response.isSuccess()) {
+                    mError.setVisibility(View.GONE);
+                    mRefresh.setVisibility(View.GONE);
+                    mProgressBar.setVisibility(View.GONE);
+                    mLinearLayout.setVisibility(View.VISIBLE);
                     mDetailedOrganization = response.body();
                     Log.i("detail", mDetailedOrganization.toString());
                     mPager = (ViewPager) findViewById(R.id.image_slider_view_pager);
@@ -94,14 +110,12 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                     mPager.setAdapter(new SlidingImage_Adapter(DetailedOrganizationActivity.this, images));
                     mPageIndicator = (CirclePageIndicator) findViewById(R.id.circle_page_indicator);
                     mPageIndicator.setViewPager(mPager);
-                    final Handler handler = new Handler();
-                    final Runnable Update = new Runnable() {
+                    final Handler handler;
+                    handler = new Handler();
+                    final Runnable update;
+                    update = new Runnable() {
                         public void run() {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+
                             if (currentPage == NUM_PAGES) {
                                 currentPage = 0;
                             }
@@ -110,13 +124,14 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                         }
                     };
 
+
                     Timer swipeTimer = new Timer();
                     swipeTimer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            handler.post(Update);
+                            handler.post(update);
                         }
-                    }, 3000, 3000);
+                    }, 10000, 10000);
 
                     // Pager listener over indicator
                     mPageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -137,7 +152,6 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
 
                         }
                     });
-                    mProgressBar.setVisibility(View.GONE);
                     Log.i("MY_TEST", mDetailedOrganization.getInfo().toString());
                     List<Info> infoList = new ArrayList<Info>();
                     infoList = mDetailedOrganization.getInfo();
@@ -160,9 +174,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                             importantInfoList.add(s);
                             continue;
                         }
-                        if (isTitle) {
-                            continue;
-                        }
+                        if (isTitle) continue;
                         featureList.add(s);
                     }
 
@@ -234,15 +246,34 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                mProgressBar.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.GONE);
+                mError.setVisibility(View.VISIBLE);
+                mRefresh.setVisibility(View.VISIBLE);
+                mRefresh.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mProgressBar.setVisibility(View.VISIBLE);
+                        mError.setVisibility(View.GONE);
+                        mRefresh.setVisibility(View.GONE);
+                        getData(menuId);
+                    }
+                });
                 t.printStackTrace();
             }
         });
     }
 
     @Override
+    public void onBackPressed() {
+        currentPage = 0;
+        finish();
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            currentPage = 0;
             finish();
             return true;
         }
@@ -253,6 +284,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
     public void toFullScreen(View view) {
         Intent intent = new Intent(DetailedOrganizationActivity.this, FullScreenImageSliderActivity.class);
         intent.putExtra("images", images);
+        intent.putExtra("page", currentPage);
         startActivity(intent);
     }
 

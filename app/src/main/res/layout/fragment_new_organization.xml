@@ -31,5 +31,39 @@
         android:indeterminateTint="@color/color_main"
         android:indeterminateTintMode="src_in" />
 </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/new_organization_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:text="НЕТ СОЕДИНЕНИЯ С СЕРВЕРОМ ПОПРОБУЙТЕ ЕЩЕ РАЗ"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary">
+                <ImageView
+                    android:id="@+id/new_organization_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_cached_white_48dp"
+                    android:background="@drawable/refresh_item"/>
+            </FrameLayout>
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>

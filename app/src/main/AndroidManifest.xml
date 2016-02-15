@@ -10,30 +10,32 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:largeHeap="true"
         android:name=".CApplication">
 
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".module.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OrganizationListActivity">
+        <activity android:name=".module.organizations.OrganizationListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailedOrganizationActivity">
+        <activity android:name=".module.detail.DetailedOrganizationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FullScreenImageSliderActivity">
+        <activity android:name=".module.slideshow.FullScreenImageSliderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

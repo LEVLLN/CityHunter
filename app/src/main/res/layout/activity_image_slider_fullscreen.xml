@@ -9,4 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black" />
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/fullscreen_p_i"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="245dp"
+        android:theme="@style/AppTheme"
+        android:visibility="invisible"/>
 </FrameLayout>

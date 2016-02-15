@@ -13,7 +13,7 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:background="@color/colorPrimary"
         />
-<RelativeLayout
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
@@ -25,17 +25,9 @@
 
 
     </android.support.v7.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/org_list_error"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:layout_centerInParent="true"
-        android:text="НЕТ СОЕДИНЕНИЯ С СЕРВЕРОМ\n ПОПРОБУЙТЕ ЕЩЕ РАЗ"
-        android:textAlignment="center"
-        android:textColor="@color/text_black"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
     <ProgressBar
         android:id="@+id/organization_list_pb"
         android:indeterminateTint="@color/color_main"
@@ -45,7 +37,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-</RelativeLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/organization_list_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:text="НЕТ СОЕДИНЕНИЯ С СЕРВЕРОМ ПОПРОБУЙТЕ ЕЩЕ РАЗ"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
+            <ImageView
+                android:id="@+id/organization_list_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_cached_white_48dp"
+                android:background="@drawable/refresh_item"
+                />
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>
 
 
 </LinearLayout>

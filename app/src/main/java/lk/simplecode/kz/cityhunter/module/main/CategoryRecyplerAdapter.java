@@ -1,4 +1,4 @@
-package lk.simplecode.kz.cityhunter;
+package lk.simplecode.kz.cityhunter.module.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import lk.simplecode.kz.cityhunter.module.organizations.OrganizationListActivity;
+import lk.simplecode.kz.cityhunter.R;
 import lk.simplecode.kz.cityhunter.model.Category;
 
 public class CategoryRecyplerAdapter extends RecyclerView.Adapter<CategoryRecyplerAdapter.ViewHolder> {

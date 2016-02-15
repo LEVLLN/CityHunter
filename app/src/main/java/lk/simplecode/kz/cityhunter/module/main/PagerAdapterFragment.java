@@ -1,12 +1,12 @@
-package lk.simplecode.kz.cityhunter;
+package lk.simplecode.kz.cityhunter.module.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class PagerAdapterFragment extends FragmentPagerAdapter {
     private Fragment mFragment;
-    public FragmentAdapter(FragmentManager mgr) {
+    public PagerAdapterFragment(FragmentManager mgr) {
         super(mgr);
     }
     private String CATALOG = "КАТАЛОГ";
@@ -24,7 +24,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             mFragment = CategoryFragment.newInstance(position);   }
         if (position==1){
-            mFragment =NewOrganizationFragment.newInstance(position);}
+            mFragment = NewOrganizationFragment.newInstance(position);}
             return mFragment;
 
     }
