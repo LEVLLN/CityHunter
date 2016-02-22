@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">CityHunter</string>
     <string name="recomended">Рекомендуем</string>
+    <string name="activity_search_enter_text">Введите название заведения или адрес</string>
+    <string name="activity_search_find">НАЙТИ</string>
+    <string name="connection_error">НЕТ СОЕДИНЕНИЯ С СЕРВЕРОМ ПОПРОБУЙТЕ ЕЩЕ РАЗ</string>
+    <string name="organization_not_found">НИЧЕГО НЕ НАЙДЕНО</string>
+    <string name="searching">Поиск</string>
 </resources>

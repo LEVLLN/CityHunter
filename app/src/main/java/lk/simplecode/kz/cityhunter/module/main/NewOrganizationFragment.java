@@ -14,9 +14,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import lk.simplecode.kz.cityhunter.module.organizations.OrganizationListRecyplerAdapter;
 import lk.simplecode.kz.cityhunter.R;
 import lk.simplecode.kz.cityhunter.model.Organization;
+import lk.simplecode.kz.cityhunter.module.organizations.OrganizationListRecyplerAdapter;
 import lk.simplecode.kz.cityhunter.network.RetrofitFacade;
 import retrofit.Callback;
 import retrofit.Response;

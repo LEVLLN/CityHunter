@@ -42,10 +42,11 @@ public class RetrofitFacade {
     }
 
     public void getOrganization(Long id, String newOrganization, Callback<List<Organization>> callback) {
-        mApiService.organizationList(id,newOrganization).enqueue(callback);
+        mApiService.organizationList(id, newOrganization).enqueue(callback);
     }
 
     public void getDetailedOrganization(Long id, Callback<DetailedOrganization> callback){
         mApiService.clarification(id).enqueue(callback);
     }
+
 }

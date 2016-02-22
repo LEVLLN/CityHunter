@@ -34,6 +34,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:design:23.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
 
 }

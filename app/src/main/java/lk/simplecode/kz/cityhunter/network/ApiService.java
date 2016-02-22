@@ -20,4 +20,6 @@ public interface ApiService {
     @GET("posts/{post_id}")
     Call<DetailedOrganization> clarification(@Path("post_id") Long organizationId);
 
+//    @GET("posts")
+//    Call<List<Organization>> resultOfSearch();
 }

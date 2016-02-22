@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:layout_marginLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_marginBottom="20dp">
 
     <TextView
         android:id="@+id/caption_features_content"
@@ -21,5 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textColor="@color/black"
+        android:textAlignment="inherit"
         android:textSize="17dp" />
 </LinearLayout>

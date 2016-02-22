@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +38,32 @@ public class CategoryRecyplerAdapter extends RecyclerView.Adapter<CategoryRecypl
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        boolean isRestaurant = mCategoryList.get(position).getName().contains("Рестораны");
+        boolean isBar = mCategoryList.get(position).getName().contains("Пабы бары");
+        boolean isCafe = mCategoryList.get(position).getName().contains("Кафе");
+        boolean isBanquet = mCategoryList.get(position).getName().contains("Банкетные залы");
+        boolean isBath = mCategoryList.get(position).getName().contains("Бани сауны");
+        boolean isClub = mCategoryList.get(position).getName().contains("Ночные клубы караоке");
+        boolean isBowling = mCategoryList.get(position).getName().contains("Бильярд боулинг");
+        boolean isHotel = mCategoryList.get(position).getName().contains("Гостиницы");
+        boolean isRecreaction = mCategoryList.get(position).getName().contains("Активный отдых");
+        boolean isBeauty = mCategoryList.get(position).getName().contains("здоровье");
+
         StringBuilder sb = new StringBuilder(mCategoryList.get(position).getName());
         sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
         final String title = sb.toString().replace("Караганды", "");
         holder.mTextView.setText(title);
+        if(isRestaurant){getIcon(R.drawable.restaurant,holder.mImageView);}
+        if(isBar){getIcon(R.drawable.beer,holder.mImageView);}
+        if(isCafe){getIcon(R.drawable.cafe,holder.mImageView);}
+        if(isBanquet){getIcon(R.drawable.banquet,holder.mImageView);}
+        if(isBath){getIcon(R.drawable.bath,holder.mImageView);}
+        if(isClub){getIcon(R.drawable.club,holder.mImageView);}
+        if(isBowling){getIcon(R.drawable.bowling,holder.mImageView);}
+        if(isHotel){getIcon(R.drawable.hotel,holder.mImageView);}
+        if(isRecreaction){getIcon(R.drawable.recreation,holder.mImageView);}
+        if(isBeauty){getIcon(R.drawable.beauty,holder.mImageView);}
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +75,11 @@ public class CategoryRecyplerAdapter extends RecyclerView.Adapter<CategoryRecypl
             }
         });
     }
-
+    public void getIcon(int icon,ImageView holder){
+        Picasso.with(mContext)
+                .load(icon)
+                .into(holder);
+    }
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);

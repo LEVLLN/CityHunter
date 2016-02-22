@@ -52,6 +52,7 @@ public class OrganizationListRecyplerAdapter extends RecyclerView.Adapter<Organi
         }
         holder.mTVTitle.setText(Html.fromHtml(mOrganizationList.get(position).getTitle()));
         holder.mTVAddress.setText(mOrganizationList.get(position).getAddress());
+    //    if(mOrganizationList.get(position).getAddress().equals("")||mOrganizationList.get(position).getAddress()==null){ holder.mTVAddress.setVisibility(View.GONE);}
         if (mOrganizationList.get(position).getDescription().equals("")) {
             holder.mTVDescription.setVisibility(View.GONE);
         } else {
@@ -66,6 +67,7 @@ public class OrganizationListRecyplerAdapter extends RecyclerView.Adapter<Organi
                 Intent intent = new Intent(mContext,DetailedOrganizationActivity.class);
                 intent.putExtra("post_id",id);
                 intent.putExtra("title",mOrganizationList.get(position).getTitle());
+                intent.putExtra("description",mOrganizationList.get(position).getDescription());
                 mContext.startActivity(intent);
             }
         });

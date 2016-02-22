@@ -1,7 +1,6 @@
 package lk.simplecode.kz.cityhunter.module.detail;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,13 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
 
@@ -54,6 +53,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
     private static int NUM_PAGES = 0;
     private String[] images;
     private static List<String> sImportantCapions;
+    private String mDescription;
 
     static {
         sImportantCapions = new ArrayList<>();
@@ -69,16 +69,17 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
         mLinearLayout = (LinearLayout) findViewById(R.id.detail_linear_layout_content);
         mToolbar = (Toolbar) findViewById(R.id.detail_organization_toolbar);
         mError = (TextView) findViewById(R.id.detail_error);
-        mRefresh = (ImageView)findViewById(R.id.detail_refresh);
+        mRefresh = (ImageView) findViewById(R.id.detail_refresh);
         mProgressBar = (ProgressBar) findViewById(R.id.detail_organization_pb);
 
         setSupportActionBar(mToolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = getIntent();
-        long menuId = intent.getLongExtra("post_id", -1l);
-        String title = intent.getStringExtra("title");
+        Intent mIntent = getIntent();
+        long menuId = mIntent.getLongExtra("post_id", -1l);
+        String title = mIntent.getStringExtra("title");
+        mDescription = mIntent.getStringExtra("description");
         setTitle(Html.fromHtml(title));
         mError.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);
@@ -88,7 +89,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
     }
 
 
-    public void getData(final long menuId){
+    public void getData(final long menuId) {
         RetrofitFacade.getInstance().getDetailedOrganization(menuId, new Callback<DetailedOrganization>() {
             @Override
             public void onResponse(Response<DetailedOrganization> response) {
@@ -160,9 +161,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                     List<Info> telephoneNumList = new ArrayList<Info>();
 
                     for (Info s : infoList) {
-                        boolean isAddress = s.getCaption().contains("Адрес");
-                        boolean isTimeWork = s.getCaption().contains("Время работы");
-                        boolean isKitchen = s.getCaption().contains("Кухня");
+
                         boolean isTelephone = s.getCaption().contains("Телефон");
                         boolean isTitle = s.getCaption().contains("Заведение");
 
@@ -179,13 +178,31 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                     }
 
                     for (Info important : importantInfoList) {
+                        boolean isAddress = important.getCaption().contains("Адрес");
+                        boolean isTimeWork = important.getCaption().contains("Время работы");
+                        boolean isKitchen = important.getCaption().contains("Кухня");
                         LayoutInflater layoutInflater = LayoutInflater.from(DetailedOrganizationActivity.this);
                         final View view = layoutInflater.inflate(R.layout.item_content, mLinearLayout, false);
                         ImageView iconImportant = (ImageView) view.findViewById(R.id.icon_item);
                         TextView tvValue = (TextView) view.findViewById(R.id.tv_item_content);
                         tvValue.setText(important.getValue());
-                        iconImportant.setBackgroundColor(Color.BLACK);
+                        // iconImportant.setBackgroundColor(Color.BLACK);
                         mLinearLayout.addView(view);
+                        if (isAddress) {
+                            Picasso.with(DetailedOrganizationActivity.this)
+                                    .load(R.drawable.address)
+                                    .into(iconImportant);
+                        }
+                        if (isTimeWork) {
+                            Picasso.with(DetailedOrganizationActivity.this)
+                                    .load(R.drawable.clock)
+                                    .into(iconImportant);
+                        }
+                        if (isKitchen) {
+                            Picasso.with(DetailedOrganizationActivity.this)
+                                    .load(R.drawable.fork)
+                                    .into(iconImportant);
+                        }
                     }
                     LayoutInflater line = LayoutInflater.from(DetailedOrganizationActivity.this);
                     final View viewLine = line.inflate(R.layout.item_line, mLinearLayout, false);
@@ -198,7 +215,6 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                         TextView tvValue = (TextView) view.findViewById(R.id.value_features_content);
                         tvValue.setText(feature.getValue());
                         featureTv.setText(feature.getCaption());
-
                         mLinearLayout.addView(view);
                     }
                     String[] nums = new String[0];
@@ -206,16 +222,25 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                         Log.i("size", String.valueOf(i));
                         nums = telephoneNumList.get(i).getValue().split(";");
                     }
-                    if (!featureList.isEmpty()) {
-                        LayoutInflater marginFlater = LayoutInflater.from(DetailedOrganizationActivity.this);
-                        final View marginView = marginFlater.inflate(R.layout.item_line, mLinearLayout, false);
-                        marginView.setBackgroundColor(Color.WHITE);
-                        mTabParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                        mTabParams.setMargins(0, 0, 0, dpToPx(30));
-                        marginView.setLayoutParams(mTabParams);
-                        mLinearLayout.addView(marginView);
-                    }
+//                    if (!featureList.isEmpty()) {
+//                        LayoutInflater marginFlater = LayoutInflater.from(DetailedOrganizationActivity.this);
+//                        final View marginView = marginFlater.inflate(R.layout.item_line, mLinearLayout, false);
+//                        marginView.setBackgroundColor(Color.WHITE);
+//                        mTabParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                        mTabParams.setMargins(0, 0, 0, dpToPx(30));
+//                        marginView.setLayoutParams(mTabParams);
+//                        mLinearLayout.addView(marginView);
+//                    }
 
+                    if (!mDescription.equals("")) {
+                        LayoutInflater layoutInflaterDescription = LayoutInflater.from(DetailedOrganizationActivity.this);
+                        final View descriptionView = layoutInflaterDescription.inflate(R.layout.item_content_features, mLinearLayout, false);
+                        TextView featur = (TextView)descriptionView.findViewById(R.id.caption_features_content);
+                        TextView tvValue = (TextView) descriptionView.findViewById(R.id.value_features_content);
+                        featur.setVisibility(View.GONE);
+                        tvValue.setText(Html.fromHtml(mDescription));
+                        mLinearLayout.addView(descriptionView);
+                    }
 
                     for (String telephoneNumber : nums) {
                         LayoutInflater layoutInflater = LayoutInflater.from(DetailedOrganizationActivity.this);
@@ -223,11 +248,7 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                         final TextView telephoneTv = (TextView) view.findViewById(R.id.telephone_number);
                         ImageView telephoneIcon = (ImageView) view.findViewById(R.id.icon_telephone);
                         telephoneTv.setText(telephoneNumber);
-                        telephoneIcon.setBackgroundColor(Color.BLUE);
                         mLinearLayout.addView(view);
-
-                        Log.i("TEL:", telephoneNumber);
-
                         telephoneTv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -236,9 +257,9 @@ public class DetailedOrganizationActivity extends AppCompatActivity {
                                 String phNum = "tel:" + telephoneTv.getText();
                                 myIntent.setData(Uri.parse(phNum));
                                 startActivity(myIntent);
-
                             }
                         });
+
                     }
 
                 }
